@@ -27,7 +27,7 @@ export default {
     async execute(interaction, config, client) {
         const deferSuccess = await InteractionHelper.safeDefer(interaction);
         if (!deferSuccess) {
-            logger.warn(`Warn interaction defer failed`, {
+            logger.warn(`Warnung Fehlgeschlagen ! `, {
                 userId: interaction.user.id,
                 guildId: interaction.guildId,
                 commandName: 'warn'
@@ -37,7 +37,7 @@ export default {
 
         try {
                 if (!interaction.member.permissions.has(PermissionFlagsBits.ModerateMembers)) {
-                    throw new Error("You need the `Moderate Members` permission to issue warnings.");
+                    throw new Error("Keine Berechtigung ! .");
                 }
 
                 const target = interaction.options.getUser("target");
@@ -47,7 +47,7 @@ export default {
                 const guildId = interaction.guildId;
 
                 if (!member) {
-                    throw new Error("The target user is not currently in this server.");
+                    throw new Error("Die person ist nicht im discord Server ! .");
                 }
 
                 
@@ -69,7 +69,7 @@ export default {
                     client,
                     guild: interaction.guild,
                     event: {
-                        action: "User Warned",
+                        action: "Benutzer wurde verwarnt ! ",
                         target: `${target.tag} (${target.id})`,
                         executor: `${moderator.tag} (${moderator.id})`,
                         reason,
@@ -86,7 +86,7 @@ export default {
                 await InteractionHelper.safeEditReply(interaction, {
                     embeds: [
                         successEmbed(
-                            `⚠️ **Warned** ${target.tag}`,
+                            `⚠️ **Verwarnung ** ${target.tag}`,
                             `**Reason:** ${reason}\n**Total Warns:** ${totalWarns}`,
                         ),
                     ],
