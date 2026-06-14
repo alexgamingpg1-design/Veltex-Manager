@@ -8,7 +8,7 @@ import { handleInteractionError } from '../../utils/errorHandler.js';
 export default {
     data: new SlashCommandBuilder()
         .setName("ban")
-        .setDescription("Ban a user from the server")
+        .setDescription("Bannt eine person vom server")
         .addUserOption((option) =>
             option
                 .setName("target")
@@ -27,10 +27,10 @@ export default {
             const reason = interaction.options.getString("reason") || "No reason provided";
 
             if (user.id === interaction.user.id) {
-                throw new Error("You cannot ban yourself.");
+                throw new Error("Du kannst dich nicht selber bannen.");
             }
             if (user.id === client.user.id) {
-                throw new Error("You cannot ban the bot.");
+                throw new Error("du kannst den bot nicht bannen ! .");
             }
 
             
